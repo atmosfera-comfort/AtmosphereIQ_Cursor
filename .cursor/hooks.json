@@ -3,7 +3,25 @@
   "hooks": {
     "postToolUse": [
       {
-        "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/client-letter-check.ps1"
+        "command": "cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -File .cursor\\hooks\\client-letter-check.ps1"
+      }
+    ],
+    "sessionStart": [
+      {
+        "command": "cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -File .cursor\\hooks\\daily-report-windows.ps1"
+      }
+    ],
+    "beforeMCPExecution": [
+      {
+        "command": "cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -File .cursor\\hooks\\gmail-draft-only.ps1",
+        "failClosed": true
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -File .cursor\\hooks\\gmail-draft-only.ps1",
+        "matcher": "MCP:send_message|MCP:send_draft|MCP:reply_message|MCP:forward_message",
+        "failClosed": true
       }
     ]
   }

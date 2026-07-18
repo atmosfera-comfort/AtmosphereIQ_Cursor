@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "google": {
+      "command": "npx.cmd",
+      "args": ["-y", "google-tools-mcp"]
+    }
+  }
+}

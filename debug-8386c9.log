@@ -1,0 +1,2 @@
+{"sessionId":"8386c9","runId":"post-fix","hypothesisId":"A","location":"shell:verify","message":"node command resolved after install","data":{"source":"C:\\Program Files\\nodejs\\node.exe","nodeVersion":"v24.18.0","npmVersion":"11.16.0","exeExists":true,"machinePathHasNodejs":true},"timestamp":1752595100000}
+{"sessionId":"8386c9","runId":"post-fix","hypothesisId":"B","location":"shell:verify","message":"PATH includes nodejs after install","data":{"machinePathEntry":"C:\\Program Files\\nodejs\\","status":"ok"},"timestamp":1752595100001}
