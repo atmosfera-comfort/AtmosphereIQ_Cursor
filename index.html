@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AtmosphereIQ — проектирование, продажа и монтаж систем микроклимата: кондиционеры, очистители воздуха, датчики CO₂ и умный дом.">
+  <title>AtmosphereIQ — комфортный воздух дома и в офисе</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #f8fafb;
+      --color-surface: #ffffff;
+      --color-text: #1a2332;
+      --color-text-muted: #5c6b7a;
+      --color-accent: #0d9488;
+      --color-accent-light: #ccfbf1;
+      --color-accent-dark: #0f766e;
+      --color-border: #e2e8f0;
+      --color-hero-bg: linear-gradient(135deg, #ecfeff 0%, #f0fdf4 50%, #f8fafb 100%);
+      --shadow-sm: 0 1px 3px rgba(26, 35, 50, 0.06);
+      --shadow-md: 0 4px 20px rgba(26, 35, 50, 0.08);
+      --shadow-lg: 0 12px 40px rgba(26, 35, 50, 0.1);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --max-width: 1120px;
+      --header-height: 72px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      height: var(--header-height);
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--color-text);
+    }
+
+    .logo__icon {
+      width: 36px;
+      height: 36px;
+      background: var(--color-accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav a {
+      font-size: 0.925rem;
+      color: var(--color-text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav a:hover { color: var(--color-accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn--primary {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    .btn--primary:hover {
+      background: var(--color-accent-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn--outline {
+      background: transparent;
+      color: var(--color-accent);
+      border: 2px solid var(--color-accent);
+    }
+
+    .btn--outline:hover {
+      background: var(--color-accent-light);
+    }
+
+    .btn--white {
+      background: white;
+      color: var(--color-accent-dark);
+    }
+
+    .btn--white:hover {
+      background: var(--color-accent-light);
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .burger.active span:nth-child(2) { opacity: 0; }
+    .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Hero */
+    .hero {
+      padding: calc(var(--header-height) + 64px) 0 72px;
+      background: var(--color-hero-bg);
+      text-align: center;
+    }
+
+    .hero__simple {
+      max-width: 640px;
+    }
+
+    .hero__title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero__text {
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    /* Sections */
+    section { padding: 80px 0; }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Services */
+    .services { background: var(--color-surface); }
+
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--color-bg);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      border: 1px solid var(--color-border);
+      transition: all 0.25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-accent-light);
+    }
+
+    .service-card__icon {
+      width: 52px;
+      height: 52px;
+      background: var(--color-accent-light);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .service-card__title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .service-card__text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+
+    /* Advantages */
+    .advantages__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .advantage {
+      display: flex;
+      gap: 16px;
+      padding: 24px;
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+    }
+
+    .advantage__num {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--color-accent);
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .advantage__title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .advantage__text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Cases */
+    .cases { background: var(--color-surface); }
+
+    .cases__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .case-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-card__header {
+      padding: 28px 28px 0;
+    }
+
+    .case-card__tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .case-card__tag--b2c {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .case-card__tag--b2b {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .case-card__title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .case-card__subtitle {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-bottom: 12px;
+    }
+
+    .case-card__meta {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 4px;
+    }
+
+    .case-card__client {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .case-card__amount {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .case-card__price {
+      text-align: right;
+    }
+
+    .case-card__amount-detail {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .case-card__body {
+      padding: 0 28px 28px;
+      flex: 1;
+    }
+
+    .case-card__problem,
+    .case-card__solution {
+      margin-bottom: 16px;
+    }
+
+    .case-card__label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: 6px;
+    }
+
+    .case-card__text {
+      font-size: 0.925rem;
+      line-height: 1.55;
+    }
+
+    .case-card__results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 20px 28px;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .case-result {
+      text-align: center;
+    }
+
+    .case-result strong {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-accent);
+    }
+
+    .case-result span {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Steps */
+    .steps__list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .steps__list::before {
+      content: "";
+      position: absolute;
+      top: 28px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--color-border);
+      z-index: 0;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step__num {
+      width: 56px;
+      height: 56px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin: 0 auto 16px;
+    }
+
+    .step__title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .step__text {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      line-height: 1.45;
+    }
+
+    /* Contact */
+    .contact {
+      background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+      color: white;
+    }
+
+    .contact .section-label { color: rgba(255,255,255,0.7); }
+    .contact .section-title { color: white; }
+    .contact .section-desc { color: rgba(255,255,255,0.85); }
+
+    .contact__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact__info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .contact-item__icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item__label {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-bottom: 2px;
+    }
+
+    .contact-item__value {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .contact-item__value a {
+      color: white;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .contact-form {
+      background: white;
+      border-radius: var(--radius);
+      padding: 32px;
+      color: var(--color-text);
+    }
+
+    .contact-form__title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--color-text-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      background: var(--color-bg);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      background: white;
+    }
+
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .contact-form .btn--primary { width: 100%; margin-top: 8px; }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 32px 0;
+      background: #0f172a;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer .logo { color: white; }
+    .footer .logo__icon { background: var(--color-accent); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      background: white;
+      border-bottom: 1px solid var(--color-border);
+      padding: 20px;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 99;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .mobile-nav a:hover { background: var(--color-bg); }
+
+    .mobile-nav .btn { margin-top: 8px; }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .services__grid { grid-template-columns: repeat(2, 1fr); }
+      .advantages__grid { grid-template-columns: repeat(2, 1fr); }
+      .steps__list { grid-template-columns: repeat(3, 1fr); }
+      .steps__list::before { display: none; }
+      .contact__grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { display: none; }
+      .header .btn--primary { display: none; }
+      .burger { display: flex; }
+
+      section { padding: 56px 0; }
+      .hero { padding-bottom: 56px; }
+
+      .services__grid,
+      .advantages__grid,
+      .cases__grid { grid-template-columns: 1fr; }
+
+      .steps__list { grid-template-columns: 1fr; gap: 24px; }
+
+      .case-card__results { grid-template-columns: 1fr; gap: 16px; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer__inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">
+        <div class="logo__icon">A</div>
+        AtmosphereIQ
+      </a>
+      <nav class="nav">
+        <a href="#services">Услуги</a>
+        <a href="#advantages">Преимущества</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#steps">Этапы</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <a href="#contact" class="btn btn--primary">Оставить заявку</a>
+      <button class="burger" aria-label="Меню" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#services">Услуги</a>
+    <a href="#advantages">Преимущества</a>
+    <a href="#cases">Кейсы</a>
+    <a href="#steps">Этапы</a>
+    <a href="#contact">Контакты</a>
+    <a href="#contact" class="btn btn--primary">Оставить заявку</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__simple">
+      <h1 class="hero__title">Установим кондиционер до начала лета</h1>
+      <p class="hero__text">
+        Подберём модель под вашу комнату и установим за один день.
+        Оставьте заявку — перезвоним и скажем точную цену.
+      </p>
+      <a href="#contact" class="btn btn--primary">Получить расчёт</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Услуги</span>
+        <h2 class="section-title">Всё для комфортного воздуха</h2>
+        <p class="section-desc">
+          Подберём оборудование под ваше помещение, установим и настроим —
+          чтобы вы просто дышали свободно.
+        </p>
+      </div>
+      <div class="services__grid">
+        <div class="service-card">
+          <div class="service-card__icon">❄️</div>
+          <h3 class="service-card__title">Кондиционирование</h3>
+          <p class="service-card__text">
+            Подбор, продажа и монтаж сплит-систем и мульти-сплитов.
+            Проектирование для квартир, домов и офисов любой площади.
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">💨</div>
+          <h3 class="service-card__title">Очистка воздуха</h3>
+          <p class="service-card__text">
+            Очистители с HEPA-фильтрами для борьбы с пылью, аллергенами
+            и запахами. Подбор под площадь и задачи.
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">📡</div>
+          <h3 class="service-card__title">Мониторинг CO₂</h3>
+          <p class="service-card__text">
+            Датчики CO₂, температуры и влажности с облачной платформой,
+            уведомлениями и отчётами для контроля качества воздуха.
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">🏠</div>
+          <h3 class="service-card__title">Умный дом</h3>
+          <p class="service-card__text">
+            Хабы и интеграция устройств: автоматическое проветривание,
+            управление климатом с телефона, сценарии «дома» и «офиса».
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advantages -->
+  <section class="advantages" id="advantages">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Преимущества</span>
+        <h2 class="section-title">Почему выбирают AtmosphereIQ</h2>
+        <p class="section-desc">
+          Мы говорим простым языком и берём на себя всё — от замера до сервисного обслуживания.
+        </p>
+      </div>
+      <div class="advantages__grid">
+        <div class="advantage">
+          <div class="advantage__num">1</div>
+          <div>
+            <h3 class="advantage__title">Под ключ</h3>
+            <p class="advantage__text">Замер, проект, поставка, монтаж и настройка — один подрядчик, без лишней суеты.</p>
+          </div>
+        </div>
+        <div class="advantage">
+          <div class="advantage__num">2</div>
+          <div>
+            <h3 class="advantage__title">Понятные решения</h3>
+            <p class="advantage__text">Объясняем, зачем нужен каждый прибор, без сложных терминов и навязанных услуг.</p>
+          </div>
+        </div>
+        <div class="advantage">
+          <div class="advantage__num">3</div>
+          <div>
+            <h3 class="advantage__title">Гарантия и сервис</h3>
+            <p class="advantage__text">Официальная гарантия на оборудование и абонентское обслуживание после монтажа.</p>
+          </div>
+        </div>
+        <div class="advantage">
+          <div class="advantage__num">4</div>
+          <div>
+            <h3 class="advantage__title">Энергоэффективность</h3>
+            <p class="advantage__text">Подбираем технику класса A++ и настраиваем режимы, чтобы снизить расходы на электричество.</p>
+          </div>
+        </div>
+        <div class="advantage">
+          <div class="advantage__num">5</div>
+          <div>
+            <h3 class="advantage__title">Данные в реальном времени</h3>
+            <p class="advantage__text">Видите качество воздуха на телефоне и получаете уведомления, когда нужно проветрить.</p>
+          </div>
+        </div>
+        <div class="advantage">
+          <div class="advantage__num">6</div>
+          <div>
+            <h3 class="advantage__title">B2C и B2B</h3>
+            <p class="advantage__text">Работаем с частными клиентами, офисами, школами, ресторанами и производством.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases -->
+  <section class="cases" id="cases">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Кейсы</span>
+        <h2 class="section-title">Как мы помогли нашим клиентам</h2>
+        <p class="section-desc">Реальные примеры из практики — для дома и для бизнеса.</p>
+      </div>
+      <div class="cases__grid">
+        <article class="case-card">
+          <div class="case-card__header">
+            <span class="case-card__tag case-card__tag--b2c">B2C · Квартира</span>
+            <h3 class="case-card__title">Семья с аллергией в новостройке</h3>
+            <p class="case-card__subtitle">3-комнатная квартира, 85 м², Москва</p>
+            <div class="case-card__meta">
+              <span class="case-card__client">Алексей Петров</span>
+              <div class="case-card__price">
+                <span class="case-card__amount">40 000 ₽</span>
+                <span class="case-card__amount-detail">кондиционер 32 000 · монтаж 8 000</span>
+              </div>
+            </div>
+          </div>
+          <div class="case-card__body">
+            <div class="case-card__problem">
+              <div class="case-card__label">Проблема</div>
+              <p class="case-card__text">
+                После ремонта — запахи, пыль от стройматериалов, у ребёнка аллергия.
+                Кондиционер есть, но воздух остаётся «тяжёлым», особенно ночью.
+              </p>
+            </div>
+            <div class="case-card__solution">
+              <div class="case-card__label">Решение</div>
+              <p class="case-card__text">
+                Установили очиститель с HEPA в детскую, датчик CO₂ в гостиную,
+                подключили умный хаб — при превышении CO₂ включается приток через кондиционер.
+              </p>
+            </div>
+          </div>
+          <div class="case-card__results">
+            <div class="case-result">
+              <strong>−70%</strong>
+              <span>аллергических симптомов</span>
+            </div>
+            <div class="case-result">
+              <strong>450 ppm</strong>
+              <span>CO₂ ночью</span>
+            </div>
+            <div class="case-result">
+              <strong>1 день</strong>
+              <span>монтаж</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-card__header">
+            <span class="case-card__tag case-card__tag--b2b">B2B · Офис</span>
+            <h3 class="case-card__title">IT-компания, open space на 120 человек</h3>
+            <p class="case-card__subtitle">Офис 900 м², Санкт-Петербург</p>
+            <div class="case-card__meta">
+              <span class="case-card__client">ООО «Диджитал Инновейшнс»</span>
+              <span class="case-card__amount">377 000 ₽</span>
+            </div>
+          </div>
+          <div class="case-card__body">
+            <div class="case-card__problem">
+              <div class="case-card__label">Проблема</div>
+              <p class="case-card__text">
+                Жалобы на духоту после обеда, частые простуды, нет данных для facility-менеджера.
+                Кондиционеры работают, но без учёта реальной загрузки помещений.
+              </p>
+            </div>
+            <div class="case-card__solution">
+              <div class="case-card__label">Решение</div>
+              <p class="case-card__text">
+                18 датчиков CO₂ и влажности, облачный дашборд, интеграция с системой вентиляции.
+                Автоматическое усиление притока при росте CO₂ выше 800 ppm.
+              </p>
+            </div>
+          </div>
+          <div class="case-card__results">
+            <div class="case-result">
+              <strong>−40%</strong>
+              <span>жалоб на воздух</span>
+            </div>
+            <div class="case-result">
+              <strong>650 ppm</strong>
+              <span>средний CO₂</span>
+            </div>
+            <div class="case-result">
+              <strong>3 дня</strong>
+              <span>внедрение</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section class="steps" id="steps">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Этапы работы</span>
+        <h2 class="section-title">Как мы работаем</h2>
+        <p class="section-desc">Прозрачный процесс от первого звонка до запуска системы.</p>
+      </div>
+      <div class="steps__list">
+        <div class="step">
+          <div class="step__num">1</div>
+          <h3 class="step__title">Заявка</h3>
+          <p class="step__text">Вы оставляете заявку — мы перезваниваем в течение 2 часов и уточняем задачу.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <h3 class="step__title">Замер и проект</h3>
+          <p class="step__text">Инженер оценивает помещение и предлагает оптимальный набор оборудования.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <h3 class="step__title">Согласование</h3>
+          <p class="step__text">Отправляем понятное коммерческое предложение с фиксированной стоимостью.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">4</div>
+          <h3 class="step__title">Монтаж</h3>
+          <p class="step__text">Устанавливаем оборудование, настраиваем систему и подключаем к платформе.</p>
+        </div>
+        <div class="step">
+          <div class="step__num">5</div>
+          <h3 class="step__title">Запуск</h3>
+          <p class="step__text">Обучаем пользованию, передаём доступы и подключаем сервисную поддержку.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Контакты</span>
+        <h2 class="section-title">Обсудим ваш проект</h2>
+        <p class="section-desc">Оставьте заявку — перезвоним, ответим на вопросы и предложим решение под ваш бюджет.</p>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__info">
+          <div class="contact-item">
+            <div class="contact-item__icon">📞</div>
+            <div>
+              <div class="contact-item__label">Телефон</div>
+              <div class="contact-item__value"><a href="tel:+78001234567">8 (800) 123-45-67</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">✉️</div>
+            <div>
+              <div class="contact-item__label">Email</div>
+              <div class="contact-item__value"><a href="mailto:hello@atmosphereiq.ru">hello@atmosphereiq.ru</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">📍</div>
+            <div>
+              <div class="contact-item__label">Офис</div>
+              <div class="contact-item__value">Москва, ул. Примерная, 10<br>Пн–Пт, 9:00–19:00</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">💬</div>
+            <div>
+              <div class="contact-item__label">Мессенджеры</div>
+              <div class="contact-item__value">Telegram · WhatsApp</div>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <h3 class="contact-form__title">Бесплатная консультация</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Имя</label>
+              <input type="text" id="name" name="name" placeholder="Как к вам обращаться" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="type">Тип объекта</label>
+            <select id="type" name="type">
+              <option value="home">Квартира / дом</option>
+              <option value="office">Офис</option>
+              <option value="retail">Магазин / ресторан</option>
+              <option value="other">Другое</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Комментарий</label>
+            <textarea id="message" name="message" placeholder="Расскажите о задаче: площадь, проблемы с воздухом..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary">Отправить заявку</button>
+          <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#" class="logo">
+        <div class="logo__icon">A</div>
+        AtmosphereIQ
+      </a>
+      <span>© 2026 AtmosphereIQ. Системы микроклимата под ключ.</span>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      mobileNav.classList.toggle('open');
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Спасибо! Мы получили вашу заявку и перезвоним в течение 2 рабочих часов.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
