@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cursor Screencast 3 — AI Partner</title>
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .multi .file.changed::after {
+      content: "●";
+      float: right;
+      color: #3dd68c;
+    }
+    .editor.small { font-size: 18px; line-height: 1.45; }
+    .split {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      flex: 1;
+      min-height: 0;
+    }
+    .pane {
+      border-top: 1px solid #222833;
+      background: #151b26;
+      padding: 18px 20px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 18px;
+      line-height: 1.45;
+      overflow: hidden;
+    }
+    .pane-h {
+      font-family: Inter, sans-serif;
+      font-size: 16px;
+      color: #8b95a7;
+      margin-bottom: 10px;
+    }
+    .add { color: #3dd68c; }
+    .prompt-type {
+      border: none;
+      min-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <div class="brand">Cursor <em>Agent</em></div>
+      <div class="pill">мультифайл</div>
+    </div>
+    <div class="main">
+      <aside class="sidebar multi" id="side">
+        <div class="label">Explorer</div>
+        <div class="file" id="f1">App.tsx</div>
+        <div class="file" id="f2">theme.css</div>
+        <div class="file" id="f3">Layout.tsx</div>
+        <div class="file">index.html</div>
+      </aside>
+      <section class="editor-wrap">
+        <div class="tabs">
+          <div class="tab active">Agent</div>
+          <div class="tab">App.tsx</div>
+          <div class="tab">theme.css</div>
+        </div>
+        <div class="split">
+          <div class="pane" style="border-top:none;">
+            <div class="pane-h">Промпт</div>
+            <div class="bubble prompt-type" id="prompt"></div>
+          </div>
+          <div class="pane">
+            <div class="pane-h">Изменения</div>
+            <div id="changes"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="caption" id="caption"></div>
+  </div>
+  <script>
+    const caption = document.getElementById('caption');
+    const prompt = document.getElementById('prompt');
+    const changes = document.getElementById('changes');
+    function showCaption(html) {
+      caption.classList.remove('show');
+      caption.innerHTML = html;
+      requestAnimationFrame(() => caption.classList.add('show'));
+    }
+    function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+    async function typeInto(el, text, delay = 40) {
+      el.textContent = '';
+      for (const ch of text) {
+        el.textContent += ch;
+        await wait(delay);
+      }
+    }
+
+    (async () => {
+      await wait(350);
+      showCaption('сделай');
+      await wait(400);
+      showCaption('тёмную тему и');
+      await typeInto(prompt, 'сделай тёмную тему и не ломай адаптив', 32);
+      showCaption('не ломай адаптив');
+      await wait(600);
+      showCaption('и он меняет');
+      await wait(450);
+      showCaption('сразу несколько<br><span class="accent">файлов</span>');
+      ['f1','f2','f3'].forEach(id => document.getElementById(id).classList.add('changed','active'));
+      changes.innerHTML = `
+        <div class="add">● App.tsx — ThemeProvider dark</div>
+        <div class="add">● theme.css — --bg / --text</div>
+        <div class="add">● Layout.tsx — media queries OK</div>
+        <div class="badge">3 файла изменено</div>
+      `;
+      await wait(1100);
+      showCaption('это уже не<br>автодополнение');
+      await wait(900);
+      showCaption('а почти<br><span class="accent">ИИ-напарник</span>');
+      await wait(1600);
+      caption.classList.remove('show');
+      await wait(250);
+      document.body.dataset.done = '1';
+    })();
+  </script>
+</body>
+</html>

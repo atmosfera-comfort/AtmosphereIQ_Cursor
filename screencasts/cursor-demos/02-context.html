@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cursor Screencast 2 — Context</title>
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <div class="brand">Cursor <em>Context</em></div>
+      <div class="pill">весь репозиторий</div>
+    </div>
+    <div class="main">
+      <aside class="sidebar">
+        <div class="label">Explorer</div>
+        <div class="file active">src/</div>
+        <div class="file">components/</div>
+        <div class="file">api/</div>
+        <div class="file">package.json</div>
+        <div class="file">tsconfig.json</div>
+      </aside>
+      <section class="editor-wrap">
+        <div class="tabs"><div class="tab active">Chat · Debug</div></div>
+        <div style="flex:1;background:#151b26;padding:28px;position:relative;">
+          <div class="scan" id="scan"></div>
+          <div class="repo-map show" id="map">
+            <div class="node" id="n1"><strong>src/auth.ts</strong><br>зависимости · JWT</div>
+            <div class="node" id="n2"><strong>src/api/users.ts</strong><br>ошибка на строке 42</div>
+            <div class="node" id="n3"><strong>src/styles/</strong><br>стиль кода проекта</div>
+            <div class="node" id="n4"><strong>package.json</strong><br>react · prisma · zod</div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="chat" id="chat">
+      <div class="chat-h">Cursor · Agent</div>
+      <div class="chat-b">
+        <div class="bubble">Почему падает /users?</div>
+        <div class="bubble ai" id="ai">
+          Смотрю репозиторий…
+          <div class="diff" id="diff"></div>
+        </div>
+      </div>
+    </div>
+    <div class="caption" id="caption"></div>
+  </div>
+  <script>
+    const caption = document.getElementById('caption');
+    const chat = document.getElementById('chat');
+    const scan = document.getElementById('scan');
+    const diff = document.getElementById('diff');
+    function showCaption(html) {
+      caption.classList.remove('show');
+      caption.innerHTML = html;
+      requestAnimationFrame(() => caption.classList.add('show'));
+    }
+    function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    (async () => {
+      await wait(350);
+      showCaption('не нужно<br>копировать');
+      await wait(800);
+      showCaption('файлы в <span class="accent">GPT</span>');
+      // crossed out metaphor via chat
+      chat.classList.add('show');
+      await wait(700);
+      showCaption('Cursor видит весь<br><span class="accent">репозиторий</span>');
+      scan.classList.add('on');
+      for (const id of ['n1','n2','n3','n4']) {
+        document.getElementById(id).classList.add('on');
+        await wait(280);
+      }
+      await wait(400);
+      showCaption('и понимает<br>контекст');
+      diff.textContent = '✓ где ошибка\n✓ какие зависимости\n✓ какой стиль кода';
+      await wait(700);
+      showCaption('где ошибка');
+      await wait(700);
+      showCaption('какие зависимости');
+      await wait(700);
+      showCaption('какой стиль кода');
+      await wait(1200);
+      caption.classList.remove('show');
+      await wait(250);
+      document.body.dataset.done = '1';
+    })();
+  </script>
+</body>
+</html>
