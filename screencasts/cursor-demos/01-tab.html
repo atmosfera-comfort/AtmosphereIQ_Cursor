@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cursor Screencast 1 — Tab</title>
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <div class="brand">Cursor <em>Tab</em></div>
+      <div class="pill">автодополнение</div>
+    </div>
+    <div class="main">
+      <aside class="sidebar">
+        <div class="label">Explorer</div>
+        <div class="file">src/</div>
+        <div class="file active">api.ts</div>
+        <div class="file">auth.ts</div>
+        <div class="file">utils.ts</div>
+      </aside>
+      <section class="editor-wrap">
+        <div class="tabs"><div class="tab active">api.ts</div></div>
+        <pre class="editor" id="editor"></pre>
+      </section>
+    </div>
+    <div class="caption" id="caption"></div>
+  </div>
+  <script>
+    const editor = document.getElementById('editor');
+    const caption = document.getElementById('caption');
+
+    const typed = `import { db } from "./db";
+
+export async function getUser(id: string) {
+  `;
+
+    const ghostFull = `const user = await db.users.findUnique({
+    where: { id },
+    include: { profile: true, orders: true },
+  });
+  if (!user) throw new Error("User not found");
+  return serializeUser(user);
+}`;
+
+    function showCaption(html) {
+      caption.classList.remove('show');
+      caption.innerHTML = html;
+      requestAnimationFrame(() => caption.classList.add('show'));
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function colorLine(l) {
+      // tokenize without breaking HTML: strings first via placeholders
+      const parts = [];
+      let i = 0;
+      const re = /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'|\b(import|export|async|function|const|await|if|throw|return|from|where|include)\b|\b(getUser|findUnique|serializeUser|users)\b/g;
+      let m;
+      let last = 0;
+      while ((m = re.exec(l))) {
+        if (m.index > last) parts.push(escapeHtml(l.slice(last, m.index)));
+        const t = m[0];
+        if (t.startsWith('"') || t.startsWith("'")) {
+          parts.push(`<span class="str">${escapeHtml(t)}</span>`);
+        } else if (/^(import|export|async|function|const|await|if|throw|return|from|where|include)$/.test(t)) {
+          parts.push(`<span class="kw">${t}</span>`);
+        } else {
+          parts.push(`<span class="fn">${t}</span>`);
+        }
+        last = m.index + t.length;
+      }
+      if (last < l.length) parts.push(escapeHtml(l.slice(last)));
+      return parts.join('') || '&nbsp;';
+    }
+
+    function render(code, showGhost, showCursor) {
+      const lines = code.split('\n');
+      let html = lines.map((l, i) => {
+        return `<span class="line"><span class="ln">${i + 1}</span>${colorLine(l)}</span>`;
+      }).join('');
+      if (showGhost) {
+        const ghostLines = ghostFull.split('\n');
+        html += ghostLines.map((l, i) =>
+          `<span class="line ghost"><span class="ln">${lines.length + i}</span>${escapeHtml(l) || '&nbsp;'}</span>`
+        ).join('');
+      }
+      if (showCursor) html += `<span class="cursor-blink"></span>`;
+      editor.innerHTML = html;
+    }
+
+    async function typeText(text, delay = 35) {
+      let cur = '';
+      for (const ch of text) {
+        cur += ch;
+        render(cur, false, true);
+        await wait(delay);
+      }
+      return cur;
+    }
+
+    function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    (async () => {
+      await wait(400);
+      showCaption('нажимаешь');
+      await typeText(typed.slice(0, 40), 28);
+      showCaption('Tab и он');
+      await typeText(typed, 22);
+      await wait(200);
+      showCaption('дописывает<br><span class="accent">целые функции</span>');
+      render(typed, true, true);
+      await wait(700);
+      // Tab accept animation
+      showCaption('<span class="keycap">Tab</span> &nbsp; целые функции');
+      await wait(350);
+      render(typed + ghostFull, false, true);
+      await wait(500);
+      showCaption('а не 1 строчку');
+      await wait(900);
+      showCaption('иногда быстрее,<br>чем ты успеваешь<br>сформулировать смысл');
+      await wait(1800);
+      caption.classList.remove('show');
+      await wait(300);
+      document.body.dataset.done = '1';
+    })();
+  </script>
+</body>
+</html>
